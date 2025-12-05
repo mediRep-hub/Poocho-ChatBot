@@ -113,7 +113,7 @@ const ChatForm: React.FC<ChatFormProps> = ({
     if (isBotThinking) return "Thinking...";
     if (isBotSpeaking) return "Speaking...";
     if (botError) return "Error! Click to retry";
-    return "Pouchoo";
+    return "Poocho";
   };
 
   const handleStop = () => {
@@ -134,7 +134,7 @@ const ChatForm: React.FC<ChatFormProps> = ({
             onClick={startListening}
             disabled={isListening || isBotSpeaking || isBotThinking}
             title={getButtonText()}
-            className="flex-1 bg-[#6C0444] min-h-[65px] h-auto py-3 px-6 cursor-pointer rounded-full font-medium text-white text-[24px] disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-80"
+            className="flex-1 bg-[#6C0444] min-h-[65px] h-auto py-3 px-6 cursor-pointer rounded-full font-medium text-white text-[24px] disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-80 flex items-center justify-center text-center whitespace-normal"
           >
             {isBotSpeaking ? <SoundWave /> : getButtonText()}
           </button>

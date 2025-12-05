@@ -17,7 +17,7 @@ Iron Levels (Ferritin, Serum Iron, TIBC)
 
 You can also visit the lab available in the Poocho app for tests.
 If you have any confusion, call our helpline: 0800 11171
-Or visit UCP Lahore for more information or assistance.
+Or visit Architect society lahore 154 D for more information or assistance.
 
 --------------------------------------
 Questions & Answers About Anemia
@@ -49,7 +49,7 @@ If symptoms continue or worsen over time.
 
 
 7. Where to get tested?
-Visit the Poocho app lab for tests, call for help, or visit UCP Lahore.
+Visit the Poocho app lab for tests, call for help, or visit Architect society lahore 154 D.
 
 `;
 export const anemiaAnswers = {
