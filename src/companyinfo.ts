@@ -6,18 +6,18 @@ Many women experience low blood levels (anemia). This can happen due to poor die
 heavy periods, pregnancy, or other health conditions.
 
 What to do:
-- Eat iron-rich foods such as spinach, lentils, meat, and beans.
-- Include Vitamin C foods (oranges, lemon, guava) to help your body absorb iron.
-- Try to rest properly and stay hydrated.
-- If symptoms continue, consult a healthcare professional.
+Eat iron-rich foods such as spinach, lentils, meat, and beans.
+Include Vitamin C foods (oranges, lemon, guava) to help your body absorb iron.
+Try to rest properly and stay hydrated.
+If symptoms continue, consult a healthcare professional.
 
 Important Tests:
-- Complete Blood Count (CBC)
-- Iron Levels (Ferritin, Serum Iron, TIBC)
+Complete Blood Count (CBC)
+Iron Levels (Ferritin, Serum Iron, TIBC)
 
-You can also visit the lab available in the Pouchoo app for tests.
-If you have any confusion, call our helpline: 0800-11171
-Or visit UCP Lahore for more information or assistance.
+You can also visit the lab available in the Poocho app for tests.
+If you have any confusion, call our helpline: 0800 11171
+Or visit Architect society lahore 154 D for more information or assistance.
 
 --------------------------------------
 Questions & Answers About Anemia
@@ -27,11 +27,11 @@ Questions & Answers About Anemia
 Anemia is a condition in which the body does not have enough healthy red blood cells or hemoglobin, causing tiredness and weakness.
 
 2. What are the symptoms of anemia?
-- Tiredness
-- Pale skin
-- Dizziness
-- Shortness of breath
-- Fast heartbeat
+Tiredness
+Pale skin
+Dizziness
+Shortness of breath
+Fast heartbeat
 
 3. What causes anemia in women?
 Answer: One of the main causes of anemia in women is heavy menstrual bleeding, which can lead to a significant loss of iron in the body. Pregnancy is another common reason because the body needs extra iron to support both the mother and the developing baby. A low-iron diet can also contribute to anemia, especially when women do not eat enough iron-rich foods. In addition, vitamin deficiencies—such as a lack of vitamin B12 or folic acid—can reduce the body’s ability to produce healthy blood cells, leading to anemia.
@@ -49,7 +49,7 @@ If symptoms continue or worsen over time.
 
 
 7. Where to get tested?
-Visit the Pouchoo app lab for tests, call 1233444 for help, or visit UCP Lahore.
+Visit the Poocho app lab for tests, call for help, or visit Architect society lahore 154 D.
 
 `;
 export const anemiaAnswers = {

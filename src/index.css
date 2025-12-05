@@ -14,3 +14,47 @@
   direction: rtl;
   text-align: right;
 }
+
+.assistant-wave {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 30px;
+}
+
+/* shared bar styles */
+.a-bar {
+  width: 6px;
+  border-radius: 6px;
+  animation: waveBounce 0.7s infinite ease-in-out;
+}
+
+/* Google Assistant Colors */
+.bar1 {
+  background: #4285f4;
+  animation-delay: 0s;
+} /* Blue  */
+.bar2 {
+  background: #34a853;
+  animation-delay: 0.15s;
+} /* Green */
+.bar3 {
+  background: #fbbc05;
+  animation-delay: 0.3s;
+} /* Yellow */
+.bar4 {
+  background: #ea4335;
+  animation-delay: 0.45s;
+} /* Red */
+
+@keyframes waveBounce {
+  0% {
+    height: 8px;
+  }
+  50% {
+    height: 32px;
+  }
+  100% {
+    height: 8px;
+  }
+}

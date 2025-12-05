@@ -1,135 +1,7 @@
-// import { useRef, useState } from "react";
-// import type { FormEvent } from "react";
-// import type { Chat } from "../types";
-
-// interface ChatFormProps {
-//   chatHistory: Chat[];
-//   setChatHistory: React.Dispatch<React.SetStateAction<Chat[]>>;
-//   generateBotResponse: (history: Chat[]) => void;
-//   isBotSpeaking: boolean; // Bot speaking state
-//   isBotThinking: boolean; // Bot thinking state
-//   botError: string | null; // Error message if any
-// }
-
-// const ChatForm: React.FC<ChatFormProps> = ({
-//   chatHistory,
-//   setChatHistory,
-//   generateBotResponse,
-//   isBotSpeaking,
-//   isBotThinking,
-//   botError,
-// }) => {
-//   const inputRef = useRef<HTMLTextAreaElement>(null); // Voice recognition
-//   const [isListening, setIsListening] = useState(false);
-//   const recognitionRef = useRef<any>(null);
-
-//   const initSpeech = () => {
-//     const SpeechRecognition =
-//       (window as any).SpeechRecognition ||
-//       (window as any).webkitSpeechRecognition;
-
-//     if (!SpeechRecognition) {
-//       alert("Your browser does not support voice input!");
-//       return null;
-//     }
-
-//     const recognition = new SpeechRecognition();
-//     recognition.lang = ""; // auto language detection
-//     recognition.interimResults = false;
-//     recognition.maxAlternatives = 1;
-//     return recognition;
-//   };
-
-//   const handleFormSubmit = (e: FormEvent) => {
-//     e.preventDefault();
-//     const userMessage = inputRef.current?.value.trim();
-//     if (!userMessage) return;
-//     if (inputRef.current) inputRef.current.value = "";
-
-//     setChatHistory((prev) => [...prev, { role: "user", text: userMessage }]);
-//     setChatHistory((prev) => [...prev, { role: "model", text: "Typing..." }]);
-
-//     generateBotResponse([...chatHistory, { role: "user", text: userMessage }]);
-//   };
-
-//   const startListening = () => {
-//     if (!recognitionRef.current) {
-//       recognitionRef.current = initSpeech();
-//       if (!recognitionRef.current) return;
-//     }
-
-//     const rec = recognitionRef.current;
-
-//     if (isListening) {
-//       rec.stop();
-//       return;
-//     }
-
-//     setIsListening(true);
-//     rec.start();
-
-//     rec.onresult = (e: any) => {
-//       const transcript = e.results[0][0].transcript;
-//       if (inputRef.current) inputRef.current.value = transcript;
-//     };
-
-//     rec.onerror = () => setIsListening(false);
-//     rec.onend = () => {
-//       setIsListening(false);
-//       const userMessage = inputRef.current?.value.trim() || "";
-//       if (userMessage) {
-//         handleFormSubmit({ preventDefault: () => {} } as FormEvent);
-//       }
-//     };
-//   };
-
-//   const getButtonText = () => {
-//     if (isListening) return "Listening...";
-//     if (botError) return "Error!";
-//     if (isBotSpeaking) return "Speaking...";
-//     if (isBotThinking) return "Thinking...";
-//     return "Pouchoo";
-//   };
-
-//   return (
-//     <form onSubmit={handleFormSubmit}>
-//       <div className="w-full">
-//         <button
-//           type="button"
-//           onClick={startListening}
-//           className="bg-[#6C0444] h-[65px] lg:w-[60%] w-full cursor-pointer rounded-full font-medium mt-auto text-white text-[20px]"
-//           title={getButtonText()}
-//         >
-//           {getButtonText()}
-//         </button>
-
-//         <textarea
-//           ref={inputRef}
-//           placeholder="Ask me anything."
-//           required
-//           rows={1}
-//           data-gramm="false"
-//           data-gramm_editor="false"
-//           data-enable-grammarly="false"
-//           autoComplete="off"
-//           spellCheck={true}
-//           className="flex-1 hidden bg-transparent text-gray-500 text-base outline-none resize-none leading-5 placeholder-gray-400"
-//           onKeyDown={(e) => {
-//             if (e.key === "Enter" && !e.shiftKey) {
-//               e.preventDefault();
-//               handleFormSubmit(e as any);
-//             }
-//           }}
-//         />
-//       </div>
-//     </form>
-//   );
-// };
-
-// export default ChatForm;
 import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { Chat } from "../types";
+import SoundWave from "./SoundWave";
 
 interface ChatFormProps {
   chatHistory: Chat[];
@@ -138,6 +10,7 @@ interface ChatFormProps {
   isBotSpeaking: boolean;
   isBotThinking: boolean;
   botError: string | null;
+  onStop: () => void;
 }
 
 const ChatForm: React.FC<ChatFormProps> = ({
@@ -147,6 +20,7 @@ const ChatForm: React.FC<ChatFormProps> = ({
   isBotSpeaking,
   isBotThinking,
   botError,
+  onStop,
 }) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [isListening, setIsListening] = useState(false);
@@ -226,30 +100,54 @@ const ChatForm: React.FC<ChatFormProps> = ({
       setIsListening(false);
       const userMessage = inputRef.current?.value.trim() || "";
       if (userMessage) {
-        handleFormSubmit({ preventDefault: () => {} } as FormEvent, userMessage);
+        handleFormSubmit(
+          { preventDefault: () => {} } as FormEvent,
+          userMessage
+        );
       }
     };
   };
 
-  // Button text based on state
   const getButtonText = () => {
     if (isListening) return "Listening...";
     if (isBotThinking) return "Thinking...";
     if (isBotSpeaking) return "Speaking...";
     if (botError) return "Error! Click to retry";
-    return "Pouchoo";
+    return "Poocho";
+  };
+
+  const handleStop = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    }
+    // Call the parent's stop handler to stop bot thinking/speaking and abort requests
+    onStop();
   };
 
   return (
     <form onSubmit={handleFormSubmit}>
       <div className="w-full flex flex-col items-center gap-3">
-        <button
-          type="button"
-          onClick={startListening}
-          className="bg-[#6C0444] h-[65px] lg:w-[60%] w-full cursor-pointer rounded-full font-medium text-white text-[24px]"
-        >
-          {getButtonText()}
-        </button>
+        <div className="flex gap-2 w-full lg:w-[75%]">
+          <button
+            type="button"
+            onClick={startListening}
+            disabled={isListening || isBotSpeaking || isBotThinking}
+            title={getButtonText()}
+            className="flex-1 bg-[#6C0444] min-h-[65px] h-auto py-3 px-6 cursor-pointer rounded-full font-medium text-white text-[24px] disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-80 flex items-center justify-center text-center whitespace-normal"
+          >
+            {isBotSpeaking ? <SoundWave /> : getButtonText()}
+          </button>
+          <button
+            type="button"
+            onClick={handleStop}
+            disabled={!isListening && !isBotThinking && !isBotSpeaking}
+            className="w-[65px] min-h-[65px] h-auto bg-red-600 hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer rounded-full font-medium text-white text-[24px] flex items-center justify-center shrink-0"
+            title="Stop"
+          >
+            ⏹
+          </button>
+        </div>
         <textarea
           ref={inputRef}
           placeholder="Ask me anything."
