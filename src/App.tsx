@@ -84,9 +84,14 @@ const App: React.FC = () => {
         role: "user",
         parts: [
           {
-            text: `User message: "${userLastMessage}".
-Detect language automatically. Reply in **Urdu** if Urdu letters found, otherwise in English.
-Keep tone polite, friendly, and relevant to Poocho services.`,
+            text: `
+You are Saira, a polite and helpful AI assistant for Poocho.
+ALWAYS reply in 1–2 short sentences only.
+Never write long paragraphs unless the user asks "Explain in detail".
+Detect language from user. If Urdu letters are found, reply in Urdu, otherwise in English.
+Keep answers short, friendly and to the point.
+User message: "${userLastMessage}".
+          `,
           },
         ],
       };

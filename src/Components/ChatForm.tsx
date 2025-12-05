@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { Chat } from "../types";
+import SoundWave from "./SoundWave";
 
 interface ChatFormProps {
   chatHistory: Chat[];
@@ -135,7 +136,7 @@ const ChatForm: React.FC<ChatFormProps> = ({
             title={getButtonText()}
             className="flex-1 bg-[#6C0444] min-h-[65px] h-auto py-3 px-6 cursor-pointer rounded-full font-medium text-white text-[24px] disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-80"
           >
-            {getButtonText()}
+            {isBotSpeaking ? <SoundWave /> : getButtonText()}
           </button>
           <button
             type="button"
